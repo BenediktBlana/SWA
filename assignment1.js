@@ -158,7 +158,7 @@ windConverter = (state) => ({
 
         if (state.type.includes("Prediction")) {
             state.to = state.to * 0.44704
-            state.from = state.from v
+            state.from = state.from * 0.44704
         }
 
         else state.value = state.value * 0.44704

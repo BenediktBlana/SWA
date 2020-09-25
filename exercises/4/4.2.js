@@ -1,84 +1,67 @@
-function Point(x, y) {
-    function GetX() {
-        return x;
-    };
+// Immutable - OO
+// Class
+class ImmutablePoint {
+    constructor(x, y) {
+        this.x = x
+        this.y = y
+    }
 
-    function GetY() {
-        return y;
-    };
+    getX() { return this.x}
 
-    function MoveTo(a, b) {
-        x = a;
-        y = b;
-    };
+    getY() { return this.y}
 
-    function ToString() {
-        return "X: " + x + " Y: " + y;
-    };
+    moveTo(a, b){
+        this.x = a
+        this.y = b
+    }
 
-    function Copy() {
-        return Point(x, y);
-    };
+    toString(){
+        return "X:" + this.x + " Y:" + this.y
+    }
 
-    return { GetX, GetY, MoveTo, ToString, Copy };
-};
-
-
-
-function Circle(cenTter, radius) {
-    function GetCenter() {
-        return center;
-    };
-
-    function GetRadius() {
-        return radius;
-    };
-
-    function MoveTo(x, y) {
-        center.MoveTo(x, y);
-    };
-
-    function ToString() {
-        return "Center: " + center.ToString() + " Radius: " + radius;
-    };
-
-    return { GetCenter, GetRadius, MoveTo, ToString };
-};
-
-// function Circle(x, y, radius) {
-//     const circle = Circle(point, radius);
-
-//     return { GetCenter: circle.GetCenter() , GetRadius: circle.GetRadius(), MoveTo: circle.MoveTo(), ToString: circle.ToString() };
-// };
+    copy(){
+        return new ImmutablePoint(this.x, this .y)
+    }
+}
 
 
-const pointSomething = Point(10, 12);
-const circleSomething = Circle(pointSomething, 10);
+class ImmutableCircle{
+    constructor(point, radius){
+        this.point = point
+        this.radius = radius
+    }
 
-console.log(pointSomething.ToString());
-pointSomething.MoveTo(12, 10);
-console.log(pointSomething.ToString());
-const point2 = pointSomething.Copy();
-console.log(point2.ToString());
-console.log(circleSomething.ToString());
+    getCenter() { return this.point}
 
-const circleSomething1 = Circle(pointSomething, 10);
-const circleSomething2 = Circle(pointSomething, 11);
-const circleSomething3 = Circle(pointSomething, 12);
-const circleSomething4 = Circle(pointSomething, 13);
-const circleSomething5 = Circle(pointSomething, 14);
+    getRadius() {return this.radius}
 
-const arrayOfCircles = [circleSomething1, circleSomething2, circleSomething3, circleSomething4, circleSomething5];
+    moveTo(a, b){
+        this.point.x = a
+        this.point.y = b
+    }
 
-const radiuses = arrayOfCircles.map(x => x.GetRadius());
+    toString(){
+        return "Point: " + this.point.toString() + " Radius: " + this.radius
+    }
 
-console.log(radiuses);
+}
 
-console.log(arrayOfCircles.map(x => x.ToString()));
+let pointA = new ImmutablePoint('10', '10')
+// let pointB = pointA.copy()
+
+// console.log(pointA.toString())
+// pointA.moveTo('11', '11')
+// console.log(pointA.toString())
+
+// console.log(pointB.toString())
+// pointB.moveTo('12', '12')
+// console.log(pointB.toString())
 
 
-const circleUsual = Circle(pointSomething, 10); 
-// const circleOverload = Circle(10, 12, 10); 
+let circle1 = new ImmutableCircle(pointA.copy(), '15')
+console.log(circle1.toString())
+circle1.moveTo('20', '20')
+console.log(circle1.toString())
 
-console.log(circleUsual.ToString());
-// console.log(circleOverload.ToString());
+console.log(pointA.toString())
+

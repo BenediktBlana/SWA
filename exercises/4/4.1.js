@@ -49,4 +49,4 @@ console.log(curried_names(persons))
 console.log(adults(persons))
 console.log(curried_adults(persons))
 console.log(oldest_person(persons))
-console.log(curried_oldest_person(persons))
+

@@ -66,6 +66,11 @@ export const Filter = () => {
         dispatch({ type: 'filter/handleFormChange', payload: [key, value] })
     }
 
+    const handleFormValueChange = (value) => {
+        dispatch({ type: 'filter/handleFormValueChange', payload: parseInt(value) })
+    }
+
+
     const onSubmitForm = async (form) => {
         try {
             await dispatch(postHistoricData(form));
@@ -115,7 +120,8 @@ export const Filter = () => {
                     </tr>
                     <tr>
                         <td>All historical data</td>
-                        <td>{JSON.stringify(data.filter(d => d.place === city))}</td>
+                        {city !== '' ? <td>{JSON.stringify(data.filter(d => d.place === city))}</td> : <td>{JSON.stringify(data.filter(d => d.place === 'Horsens'))}</td>}
+
                     </tr>
                     <tr>
                         <td>Predictions</td>
@@ -128,7 +134,7 @@ export const Filter = () => {
                 <label>place </label>
                 <input type="text" onChange={(e) => handleFormChange('place', e.target.value)}></input>
                 <br />
-                <label>date (yyyy-dd-mm) </label>
+                <label>date (yyyy-MM-dd'T'HH:mm:ss.fffffff'Z) </label>
                 <input type="text" onChange={(e) => handleFormChange('time', e.target.value)}></input>
                 <br />
                 <label>type </label>
@@ -136,7 +142,7 @@ export const Filter = () => {
                     {types.map(d => <option key={d}>{d}</option>)}
                 </select>
                 <br />
-                <label>value </label><input type="number" onChange={(e) => handleFormChange('value', e.target.value)} ></input>
+                <label>value </label><input type="number" onChange={(e) => handleFormValueChange(e.target.value)} ></input>
                 <br />
                 <label>unit </label><input type="text" onChange={(e) => handleFormChange('unit', e.target.value)}  ></input>
                 <button type="button" onClick={() => onSubmitForm(form)}>SUBMIT</button>

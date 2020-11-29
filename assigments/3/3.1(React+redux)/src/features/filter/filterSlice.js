@@ -59,10 +59,10 @@ export const filterSlice = createSlice({
             state.dateTo = action.payload
             state.data = state.data.filter((e) => e.time >= state.dateTo);
         },
+        handleFormValueChange(state, action){
+            state.form['value'] = action.payload
+        },
         handleFormChange(state, action) {
-            if(action.payload[0] === 'value'){
-                state.form[action.payload[0]] = parseInt( action.payload[1])
-            }
             state.form[action.payload[0]] = action.payload[1]
         }
     },
@@ -106,7 +106,7 @@ export const filterSlice = createSlice({
     }
 })
 
-export const { setCity, setDateFrom, setDateTo, handleFormChange } = filterSlice.actions;
+export const { setCity, setDateFrom, setDateTo, handleFormChange, handleFormValueChange } = filterSlice.actions;
 
 export default filterSlice.reducer;
 
